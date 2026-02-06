@@ -1,8 +1,10 @@
 
+import listas.ListaDinamica;
 import listas.ListaSimples;
 
 public class Main {
     public static void main(String[] args) {
+        System.out.println("LISTA SIMPLES- testes");
         // instanciando uma lista de Strings com capacidade para 3 nomes
         ListaSimples<String> nomes = new ListaSimples<>(3);
 
@@ -34,5 +36,28 @@ public class Main {
         nomes.removeAt(1);
         System.out.println("Posição 1: " + nomes.get(1)); // agora é João, substituiu Maria
 
+        System.out.println("LISTA DINÂMICA- testes");
+        ListaDinamica<String> lista = new ListaDinamica<>();
+        lista.inserir("Opa");
+        lista.inserir("Olá");
+        lista.inserir("Boa noite");
+
+        // na dinâmica, o tamanho cresce conforme inserimos
+        System.out.println("Tamanho atual: " + lista.size());
+
+        System.out.println("\n--- Teste do Exibir ---");
+        // Deve mostrar: Opa - Olá - Boa noite
+        lista.exibir();
+
+        System.out.println("\n--- Teste do Get (Busca por Pulo) ---");
+        // O get percorre os nós até o índice 1
+        System.out.println("Elemento no índice 1: " + lista.get(1));
+
+        System.out.println("\n--- Teste de Limites ---");
+        try {
+            System.out.println(lista.get(10)); // deve estourar seu erro de índice inválido
+        } catch (RuntimeException e) {
+            System.out.println (e.getMessage());
+        }
     }
 }
