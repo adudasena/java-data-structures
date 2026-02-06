@@ -48,5 +48,21 @@ public class ListaDinamica <T>{
         }
         return atual.dado;
     }
-}
+    public void remover(int indice) {
+        if (indice == 0) {
+            inicio= inicio.proximo;  //segundo vira o primeiro
+        } else {
+            No<T> anterior = inicio;
+            //caminhamos até o nó ANTERIOR ao que queremos remover
+            for (int i = 0; i < indice - 1; i++) {
+                anterior = anterior.proximo;
+            }
+            //o próximo do anterior passa a ser o próximo do que está sendo removido
+            anterior.proximo = anterior.proximo.proximo;
+        }
+        tamanho--; //contador atualizado
+
+
+        }
+    }
 
