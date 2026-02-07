@@ -17,4 +17,8 @@ public class PilhaDinamica<T> {
         topo = topo.proximo; // o topo pula para o de baixo
         return valor;
     }
+
+    public boolean estaVazia() {
+        return topo == null;
+    }
 }

@@ -1,6 +1,10 @@
-
 import listas.ListaDinamica;
 import listas.ListaSimples;
+import pilhas.PilhaDinamica;
+import filas.FilaDinamica;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 
 public class Main {
     public static void main(String[] args) {
@@ -57,9 +61,35 @@ public class Main {
         try {
             System.out.println(lista.get(10)); // deve estourar seu erro de índice inválido
         } catch (RuntimeException e) {
-            System.out.println (e.getMessage());
+            System.out.println(e.getMessage());
+        }
+
+        System.out.println("\n--- Teste de pilha e fila dinâmica---");
+        PilhaDinamica<String> pilha = new PilhaDinamica<>();
+        FilaDinamica<String> fila = new FilaDinamica<>();
+
+        System.out.println("\n--- Lendo Arquivo com BufferedReader ---");
+        try (BufferedReader br = new BufferedReader(new FileReader("dados.txt"))) { //abre o arquivo
+            String linha;
+            while ((linha = br.readLine()) != null) { //enquanto o arquivo tiver linhas, lê e adc nessa variável. Quando chegar no fim, readLine retorna null e para o loop
+                System.out.println("Lendo linha: " + linha);
+                pilha.push(linha);    //adiciona na pilha (LIFO)
+                fila.enfileirar(linha);  //adiciona na fila (FIFO)
+            }
+        } catch (IOException e) {
+            System.out.println("Arquivo 'dados.txt' não encontrado. Pule o teste de leitura.");
+        }
+
+        System.out.println("\n--- Resultado da Pilha (Ordem Inversa) ---");
+        while (!pilha.estaVazia()) {
+            // vai imprimir: Terceiro - Segundo - Primeiro
+            System.out.println("Removendo da Pilha: " + pilha.pop());
+        }
+
+        System.out.println("\n--- Resultado da Fila (Ordem de Chegada) ---");
+        while (!fila.estaVazia()) {
+            // vai imprimir: Primeiro - Segundo - Terceiro
+            System.out.println("Removendo da Fila: " + fila.desenfileirar());
         }
     }
-
-
 }
